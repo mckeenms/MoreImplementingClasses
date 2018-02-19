@@ -2,8 +2,8 @@
 A   CapitalT   class and methods that use the Cross class.
 
 Authors: David Mutchler, Dave Fisher, Valerie Galluzzi, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Mason McKeen.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -14,10 +14,10 @@ def main():
     #   Uncomment only 1 test at a time as you develop your code.
     # --------------------------------------------------------------
 
-    # run_test_simple_t()
-    # run_test_set_colors()
-    # run_test_move_by()
-    # run_test_clone()
+    run_test_simple_t()
+    run_test_set_colors()
+    run_test_move_by()
+    run_test_clone()
 
 
 def run_test_simple_t():
@@ -134,8 +134,19 @@ class CapitalT(object):
           :type height:   int
           :type letter_thickness:   int
         """
+        self.center = intersection_center
+        self.width = width
+        self.height = height
+        self.thicc = letter_thickness
+        toph = rg.Point(intersection_center.x - (width / 2), intersection_center.y + (letter_thickness / 2))
+        both = rg.Point(intersection_center.x + (width / 2), intersection_center.y - (letter_thickness / 2))
+        topv = rg.Point(intersection_center.x - (letter_thickness / 2), intersection_center.y + height - (letter_thickness / 2))
+        botv = rg.Point(intersection_center.x + (letter_thickness / 2), intersection_center.y - (letter_thickness / 2))
+        self.h_rect = rg.Rectangle(toph, both)
+        self.v_rect = rg.Rectangle(topv, botv)
+
         # --------------------------------------------------------------
-        # TODO: 3.
+        # DONE: 3.
         #   READ the above specification, including the Example.
         #   Implement this method
         #   Note: you will need to also implement attach_to before testing
@@ -159,8 +170,10 @@ class CapitalT(object):
         Type hints:
           :type window: rg.RoseWindow
         """
+        self.h_rect.attach_to(window)
+        self.v_rect.attach_to(window)
         # --------------------------------------------------------------
-        # TODO: 4.
+        # DONE: 4.
         #   READ the above specification, including the Example.
         #   Implement and test this method by looking at the console and
         #     the graphics window (compare it to simple_t.pdf)
@@ -186,8 +199,12 @@ class CapitalT(object):
           :type fill_color: str
           :type outline_color: str
         """
+        self.h_rect.fill_color = fill_color
+        self.h_rect.outline_color = outline_color
+        self.v_rect.fill_color = fill_color
+        self.v_rect.outline_color = outline_color
         # --------------------------------------------------------------
-        # TODO: 5.
+        # DONE: 5.
         #   READ the above specification, including the Example.
         #   Implement and test this method by uncommenting the appropriate
         #     run_test method in main. Compare the graphics window to
@@ -216,8 +233,16 @@ class CapitalT(object):
           :type dx: int
           :type dy: int
         """
+        self.h_rect.corner_1.x = self.h_rect.corner_1.x + dx
+        self.h_rect.corner_1.y = self.h_rect.corner_1.y + dy
+        self.h_rect.corner_2.x = self.h_rect.corner_2.x + dx
+        self.h_rect.corner_2.y = self.h_rect.corner_2.y + dy
+        self.v_rect.corner_1.x = self.v_rect.corner_1.x + dx
+        self.v_rect.corner_1.y = self.v_rect.corner_1.y + dy
+        self.v_rect.corner_2.x = self.v_rect.corner_2.x + dx
+        self.v_rect.corner_2.y = self.v_rect.corner_2.y + dy
         # --------------------------------------------------------------
-        # TODO: 6.
+        # DONE: 6.
         #   READ the above specification, including the Example.
         #   Implement and test this method by uncommenting the appropriate
         #     run_test method in main. Compare the graphics window to
@@ -244,8 +269,15 @@ class CapitalT(object):
         Type hints:
           :rtype: CapitalT
         """
+        center = self.center
+        width = self.width
+        height = self.height
+        thickness = self.thicc
+        t2 = CapitalT(center, width, height, thickness)
+        t2.set_colors(self.v_rect.fill_color, self.v_rect.outline_color)
+        return t2
         # --------------------------------------------------------------
-        # TODO: 7.
+        # DONE: 7.
         #   READ the above specification, including the Example.
         #   Implement and test this method by uncommenting the appropriate
         #     run_test method in main. Compare the graphics window to
